@@ -63,7 +63,7 @@ class Main implements EventListenerObject{
         }
         xmlRequest.open("GET","http://localhost:8000/devices",true)
         xmlRequest.send();
-    }
+    } 
 
     private ejecutarPost(id:number,state:boolean) {
         let xmlRequest = new XMLHttpRequest();

@@ -28,4 +28,4 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
     - Volviendo a levantarlo
 -  Se corrió el localhost:8000/otracosa exitosamente.
 - Nuevo commit. 
-- Actualizacion de README. Commit.
+- Actualizacion de README. Commit. EDIT: Solo funciona si hago algún tipo de edición tal que aparece el mensaje "Connected to DB under thread ID:" en la consola del backend. Si hago una edición en el "main.ts" funciona.

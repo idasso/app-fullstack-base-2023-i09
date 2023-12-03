@@ -22,7 +22,7 @@ app.get("/otraCosa",(req,res,next)=>{
     utils.query("select id, name from Devices", (err,rsp,fields)=>{
     console.log("err: ",err);
     console.log("rsp: ",rsp);
-    console.log("fields: ",fields);
+    //console.log("fields: ",fields);
     res.send("Listo");
     });
     
