@@ -20,3 +20,12 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
 - En el index.html defino una región donde ubicar un <div> para visualizar la lista de dispositivos.
 - Se complete la confección de la lista al modo en que se obtiene con los IDs de cada el elemento antes del intervalo de la clase 7/8. Ya se reciben los datos en el backend. Lo que sigue es iteractuar con la base de datos.
 - Hago un commit con el estado actual.
+- Hubo varios problemas para obtener respuesta de la base de datos siguiendo los pasos que se hicieron en la clase 7/8. Finalmente se resolvió:
+    - Borrando tanto los contenedores como las imágenes en docker
+    - Reiniciando la PC
+    - Levantando el docker nuevamente
+    - Bajando el docker
+    - Volviendo a levantarlo
+-  Se corrió el localhost:8000/otracosa exitosamente.
+- Nuevo commit. 
+- Actualizacion de README. Commit.
