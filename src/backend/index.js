@@ -33,6 +33,17 @@ app.get('/devices/', function(req, res, next) {
     res.send(JSON.stringify(devices)).status(200);
 });
 
+app.post("/device",(req,res,next)=>{
+    console.log("Llego el post",
+    "UPDATE Devices SET state = "+req.body.state+" WHERE id = "+req.body.id);
+    if(req.body.name==""){
+        res.status(409).send("no tengo nada que hacer");
+    }else{
+        res.status(200).send("se guardo el dispositivo");
+    }
+    
+});
+
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");
 });

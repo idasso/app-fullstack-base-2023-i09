@@ -11,6 +11,12 @@ Será posible interactuar con los dispositivos pudiendo encenderlos/apagarlos ha
 Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y validaciones en la carga de los campos indicados.
 
 ## Log
+
+03/12/2023
 - Copio localmente la branch "maqueta"
-- Defino un nuevo branch "dev" para el desarrollo del TP
-- Edito el readme del nuevo branch "dev"
+- Defino un nuevo branch "dev" para el desarrollo del TP y hago push
+- Edito el readme del nuevo branch "dev" y hago un commit + push para validar el enlace con GitHub
+- Ejecuto docker-compose up para conocer el status de partida para el desarrollo. Frontend (localhost:8000): OK. Conexión con la DB (localhost:8001): OK.
+- En el index.html defino una región donde ubicar un <div> para visualizar la lista de dispositivos.
+- Se complete la confección de la lista al modo en que se obtiene con los IDs de cada el elemento antes del intervalo de la clase 7/8. Ya se reciben los datos en el backend. Lo que sigue es iteractuar con la base de datos.
+- Hago un commit con el estado actual.

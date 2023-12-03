@@ -5,6 +5,7 @@
       <link type="text/css" rel="stylesheet" href="./static/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="./static/css/styles.css"  media="screen,projection"/>
       <script type="text/javascript" src="./static/js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/device.js"></script> <!-- Agrego el "device.js" antes que el "main.js" -->
       <script type="text/javascript" src="js/main.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -22,17 +23,23 @@
             <!-- Page Body -->
             <div class="container">
                 <br/>
-                <h3>Smart Home Web Client!</h3>
+                <h3>Lista de dispositivos</h3> <!-- Título sección Lista de dispositivos -->
                 <br/>
-                <div class="row">
-                    <div class="input-field col s12 m12 l12 xl12">
-                        <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
-                    </div>
+                <!-- Armado de un div para la inserción de la lista basado en lo desarrllado en clase. Esta lista se implementará con una "collection". A diferencia de lo desarrollado en clase, esta lista deberá cargarse automáticamente cuando la página se termine de cargar en función de los dispositivos disponibles en la base de datos.-->
+                <div id="lista" class="col s12 m6 l6">
+                    <ul class="collection" id="listaDisp">
+                                                    
+                    </ul>
+                    <!--Agrego el botón listar hasta que logre hacer automático el listado-->
                     <div class="col s4 m4 l2 xl2">
-                        <button class="btn waves-effect waves-light button-view" onclick="SayHello();" name="hello_button">PRESS ME</button>
+                        <button class="btn waves-effect waves-light button-view" id="btnListar" name="hello_button">Listar</button>
                     </div>
+
                 </div>
-            </div>	
+            </div>
+            
+            
+          	
         </main>
 		<!-- Page Footer -->
         <footer class="page-footer" style="background-color:#124580">
