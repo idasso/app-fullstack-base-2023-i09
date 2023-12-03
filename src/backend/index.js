@@ -3,7 +3,13 @@
 var PORT    = 3000;
 
 var express = require('express');
+var cors = require("cors");
+var corsOptions = {origin:"*",optionSucessStatus:200};
+
+
 var app     = express();
+app.use(cors(corsOptions));
+
 var utils   = require('./mysql-connector');
 
 // to parse application/json
@@ -12,6 +18,15 @@ app.use(express.json());
 app.use(express.static('/home/node/app/static/'));
 
 //=======[ Main module code ]==================================================
+app.get("/otraCosa",(req,res,next)=>{
+    utils.query("select id, name from Devices", (err,rsp,fields)=>{
+    console.log("err: ",err);
+    console.log("rsp: ",rsp);
+    console.log("fields: ",fields);
+    res.send("Listo");
+    });
+    
+});
 
 app.get('/devices/', function(req, res, next) {
     devices = [

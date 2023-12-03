@@ -29,7 +29,7 @@ class Main implements EventListenerObject{
                          ${d.description}
                         </p>
                         <a href="#!" class="secondary-content">
-                        <div class="switch">
+                        <div class="switch" >
                         <label>
                           Off
                           <input type="checkbox"`;
