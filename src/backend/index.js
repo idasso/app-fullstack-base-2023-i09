@@ -44,34 +44,18 @@ app.get('/devices/', function(req, res, next) {
         }
     });
 });
-    // devices = [
-    //     { 
-    //         'id': 1, 
-    //         'name': 'Lampara 1', 
-    //         'description': 'Luz living', 
-    //         'state': 0, 
-    //         'type': 1, 
-    //     },
-    //     { 
-    //         'id': 2, 
-    //         'name': 'Ventilador 1', 
-    //         'description': 'Ventilador Habitacion', 
-    //         'state': 1, 
-    //         'type': 2, 
-    //     },
-    // ]
-    //res.send(JSON.stringify(devices)).status(200);
-//});
-
+    
 app.post("/device",(req,res,next)=>{
     console.log("Llego el post",
     "UPDATE Devices SET state = "+req.body.state+" WHERE id = "+req.body.id);
-    if(req.body.name==""){
-        res.status(409).send("no tengo nada que hacer");
-    }else{
-        res.status(200).send("se guardo el dispositivo");
+    utils.query("UPDATE Devices SET state = "+req.body.state+" WHERE id = "+req.body.id);
+    console.log("req.body.name:", req.body.name);
+    console.log("res.status:", res.statusCode);
+    if(res.statusCode==200){
+        res.status(200).send("Se actualizó el estado dispositivo.");
+    } else{
+        res.status(409).send("Error al actualizar el estado del dispositivo.");
     }
-    
 });
 
 app.listen(PORT, function(req, res) {
