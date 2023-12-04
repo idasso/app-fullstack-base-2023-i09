@@ -14,7 +14,8 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
 04/12/2023
 - Se retoma la edición del backend buscando lograr conformar la vista de dispositivos. Sigue siendo necesario hacer una edición en el "main.ts" luego de cada vez que se levanta el docker.
 - Se completa el index.js para probar el "localhost:8000/otracosa/:id/:algo". Funciona OK. Commit.
-- Pruebo reformular el médoto GET Devices para hace que se recupere la lista de la BD y se ponga en pantalla.
+- Pruebo reformular el médoto GET Devices para hace que se recupere la lista de la BD y se ponga en pantalla. Completado. *Falta* logar que la lista solo se presente una vez y que al activar los switches de encendido/apagado se complete el POST en la BD.
+- Se agrega el la imagen de lightbulb.png y el favicon.ico. *Falta* que las imágenes se asignen automáticamente según el Device>Type. Commit.
 
 03/12/2023
 - Copio localmente la branch "maqueta"

@@ -33,24 +33,35 @@ app.get("/otraCosa/:id/:algo",(req,res,next)=>{
 });
 
 app.get('/devices/', function(req, res, next) {
-    devices = [
-        { 
-            'id': 1, 
-            'name': 'Lampara 1', 
-            'description': 'Luz living', 
-            'state': 0, 
-            'type': 1, 
-        },
-        { 
-            'id': 2, 
-            'name': 'Ventilador 1', 
-            'description': 'Ventilador Habitacion', 
-            'state': 1, 
-            'type': 2, 
-        },
-    ]
-    res.send(JSON.stringify(devices)).status(200);
+    utils.query("select * from Devices where 1",(err,rsp,fields)=>{
+        if(err==null){
+            console.log("rsp: ",rsp);
+            devices = rsp;
+            res.status(200).send(JSON.stringify(devices));
+        }else{
+            console.log("err: ",err);
+            res.status(409).send(err);
+        }
+    });
 });
+    // devices = [
+    //     { 
+    //         'id': 1, 
+    //         'name': 'Lampara 1', 
+    //         'description': 'Luz living', 
+    //         'state': 0, 
+    //         'type': 1, 
+    //     },
+    //     { 
+    //         'id': 2, 
+    //         'name': 'Ventilador 1', 
+    //         'description': 'Ventilador Habitacion', 
+    //         'state': 1, 
+    //         'type': 2, 
+    //     },
+    // ]
+    //res.send(JSON.stringify(devices)).status(200);
+//});
 
 app.post("/device",(req,res,next)=>{
     console.log("Llego el post",
