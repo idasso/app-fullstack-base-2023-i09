@@ -11,6 +11,10 @@ Será posible interactuar con los dispositivos pudiendo encenderlos/apagarlos ha
 Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y validaciones en la carga de los campos indicados.
 
 ## Log
+04/12/2023
+- Se retoma la edición del backend buscando lograr conformar la vista de dispositivos. Sigue siendo necesario hacer una edición en el "main.ts" luego de cada vez que se levanta el docker.
+- Se completa el index.js para probar el "localhost:8000/otracosa/:id/:algo". Funciona OK. Commit.
+- Pruebo reformular el médoto GET Devices para hace que se recupere la lista de la BD y se ponga en pantalla.
 
 03/12/2023
 - Copio localmente la branch "maqueta"
@@ -28,4 +32,4 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
     - Volviendo a levantarlo
 -  Se corrió el localhost:8000/otracosa exitosamente.
 - Nuevo commit. 
-- Actualizacion de README. Commit. EDIT: Solo funciona si hago algún tipo de edición tal que aparece el mensaje "Connected to DB under thread ID:" en la consola del backend. Si hago una edición en el "main.ts" funciona.
+- Actualizacion de README. Commit. EDIT: Solo funciona si hago algún tipo de edición tal que aparece el mensaje "Connected to DB under thread ID:" en la consola del backend. Si hago una edición en el "main.ts" funciona. Quizá esto hubiera andado antes y no era necesario hacer toda la desinstalación+reinstalación.

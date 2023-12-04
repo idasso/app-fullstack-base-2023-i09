@@ -18,14 +18,18 @@ app.use(express.json());
 app.use(express.static('/home/node/app/static/'));
 
 //=======[ Main module code ]==================================================
-app.get("/otraCosa",(req,res,next)=>{
-    utils.query("select id, name from Devices", (err,rsp,fields)=>{
-    console.log("err: ",err);
-    console.log("rsp: ",rsp);
-    //console.log("fields: ",fields);
-    res.send("Listo");
+app.get("/otraCosa/:id/:algo",(req,res,next)=>{
+    console.log("id",req.params.id)
+    console.log("algo",req.params.algo)
+    utils.query("select * from Devices where id="+req.params.id,(err,rsp,fields)=>{
+        if(err==null){
+            console.log("rsp: ",rsp);
+            res.status(200).send(JSON.stringify(rsp));
+        }else{
+            console.log("err: ",err);
+            res.status(409).send(err);
+        }
     });
-    
 });
 
 app.get('/devices/', function(req, res, next) {
