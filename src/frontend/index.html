@@ -37,6 +37,52 @@
                     </div>
 
                 </div>
+                <br>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Agregar</a>
+                               
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <div class="col s12 m6 l6">
+                            <h3>Agregar nuevo dispositivo</h3>
+                            
+                            <div class="input-field">
+                                <input id="nombreDispo" type="text" class="validate">
+                                <label for="nombreDispo">Nombre del dispositivo</label>
+                            </div>
+
+                            <div class="input-field">
+                                <input id="descripcion" type="text" class="validate">
+                                <label for="descripcion">Descripción</label>
+                            </div>
+                                                    
+                            <p>
+                                <label>
+                                <input id="estadoInicial" type="checkbox" />
+                                <span>Estado incial encendido</span>
+                                </label>
+                            </p>
+                            
+                            <div class="input-field col s12">
+                                <select id="tipoDispo">
+                                  <option value="" disabled selected>Tipo de dispositivo</option>
+                                  <option value="1">Luz</option>
+                                  <option value="2">Persiana</option>
+                                  <option value="3">Ventilador</option>
+                                </select>
+                            </div>
+                            </div>
+
+                            <p id="pInfo"  ></p>
+                            
+                            <button id="btnGuardar" class="modal-close  btn">Guardar nuevo dispositivo</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <p id="pInfo"  ></p>
+
             </div>
             
             

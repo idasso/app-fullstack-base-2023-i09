@@ -5,6 +5,8 @@ var M; // Para resolver el la falla que arroja TS defino "M". "M" se define en t
 
 class Main implements EventListenerObject{
     // agregar un contructor y que haga el buscarDevices
+    public dispositivosNuevos: Array<Device>= new Array<Device>();
+
     private buscarDevices() {
         
         let xmlRequest = new XMLHttpRequest(); // Permite hacer peticiones a un servido asíncrono. Es decir, el servidor en algún momento nos va a contestar, pero no sabemos cuando.
@@ -64,7 +66,7 @@ class Main implements EventListenerObject{
         xmlRequest.open("GET","http://localhost:8000/devices",true)
         xmlRequest.send();
     } 
-
+    // DELETE se puede mandar en el send (llega al body, hay que usar el setRequestHeader indicando que el conten type es tipo json) o por la cabecera ( no hace falta aclarar nada porque no viaja info en el body)
     private ejecutarPost(id:number,state:boolean) {
         let xmlRequest = new XMLHttpRequest();
 
@@ -85,6 +87,31 @@ class Main implements EventListenerObject{
             state: state   };
         xmlRequest.send(JSON.stringify(s));
     }
+ 
+    private cargarDispositivo(): void{
+        let name =<HTMLInputElement> document.getElementById("nombreDispo");
+        let description = <HTMLInputElement>document.getElementById("descripcion");
+        let state = <HTMLInputElement>document.getElementById("estadoInicial");
+        let type = <HTMLSelectElement>document.getElementById("tipoDispo");
+        let pInfo = document.getElementById("pInfo");
+        console.log("state.value: ",state.checked);
+        console.log("state.type: ",type.selectedIndex);
+        if (name.value.length > 4) {
+            let dispoNuevo: Device = new Device(name.value, description.value, state.checked, type.selectedIndex);
+            this.dispositivosNuevos.push(dispoNuevo);
+            
+            //Pasar el objeto Devices a otro método a cargo de guardar
+
+            pInfo.innerHTML = "Nuevo dispositivo cargado correctamente.";
+            pInfo.className = "textoCorrecto";
+
+            console.log("dispoNuevo: ", dispoNuevo);
+            
+        } else {
+            pInfo.innerHTML = "Carga de nuevo dispositivo rechazada.";
+            pInfo.className = "textoError";
+        }
+    }
 
     handleEvent(object: Event): void {
         let elemento = <HTMLElement>object.target;
@@ -97,6 +124,8 @@ class Main implements EventListenerObject{
             console.log(checkbox.getAttribute("nuevoAtt"),checkbox.checked);
             
             this.ejecutarPost(parseInt(checkbox.getAttribute("nuevoAtt")),checkbox.checked);
+        } else if ("btnGuardar" == elemento.id) {
+            this.cargarDispositivo();
         } else {
             console.log("elemento.id no matcheo con las opciones disponibles")
         }
@@ -111,7 +140,16 @@ window.addEventListener("load", () => {
     let main1: Main = new Main();
     // opcion para aagregar el llamado. Mínimo: back + front + persistencia
     let boton = document.getElementById("btnListar");
-    boton.addEventListener("click", main1); 
+    boton.addEventListener("click", main1);
+
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems, "");
+    
+    var elemsModal = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elemsModal, "");
+    
+    let botonGuardar = document.getElementById("btnGuardar");
+    botonGuardar.addEventListener("click",main1);
     
     
 

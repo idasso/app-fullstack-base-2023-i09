@@ -26,6 +26,7 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
     - Agregar la aclaración acerca de como responde la conexión a la BD y la necesidad de hacer una edición en el main.ts para que se pueda completar la conexión con la BD.
     - Acerca de las notas en el README, no hace falta el log ya que es algo propio de los commit. Usar el readme para completar mas detalle del proyecto y el objetivo de lo que voy a implementar. Usarlo como referecnia apra aclarar la expectativas, que hace el pryecto, etc.
     - Lo mínimo para aprobar es lograr que se carguen los dispositivos desde la BD y que se pueda persistir el cambio de estado, junto con la documentación asociada. Las opciones siguientes serán lograr agregar dispositivos con un modal. Luego, si queda tiempo apunto a implementar el borrado de dispositivos en la BD.
+    - Edición del HTML y del main.ts. Agregado del botón y modal asociado para la carga de nuevos dispositivos (método cargarDispositivo). Se editó el class Devices agregando el constructor para que sea obligatorio poner los datos del formulario de carga. Falta hacer el post a la base de datos, borrar los campos luego de la carga asignando comillas vacías y reubicar el texto que valida si el dispositivo se cargó correctamente o no.
 
 03/12/2023
 - Copio localmente la branch "maqueta"
