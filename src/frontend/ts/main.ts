@@ -85,37 +85,78 @@ class Main implements EventListenerObject{
         let s = {
             id: id,
             state: state   };
-        xmlRequest.send(JSON.stringify(s));
+        xmlRequest.send(JSON.stringify(s)); 
     }
  
-    private cargarDispositivo(): void{
+    private formDispositivo(): Device{ //Manejo del formulario de carga del dispositivo
         let name =<HTMLInputElement> document.getElementById("nombreDispo");
         let description = <HTMLInputElement>document.getElementById("descripcion");
         let state = <HTMLInputElement>document.getElementById("estadoInicial");
         let type = <HTMLSelectElement>document.getElementById("tipoDispo");
         let pInfo = document.getElementById("pInfo");
+        pInfo.innerHTML = "";
         console.log("state.value: ",state.checked);
         console.log("state.type: ",type.selectedIndex);
         if (name.value.length > 4) {
             let dispoNuevo: Device = new Device(name.value, description.value, state.checked, type.selectedIndex);
             this.dispositivosNuevos.push(dispoNuevo);
             
+            //Reseteo los campos del formulario de carga
+            name.value = "";
+            description.value = "";
+            state.checked = false;
+            type.selectedIndex = 0;
             //Pasar el objeto Devices a otro método a cargo de guardar
 
             pInfo.innerHTML = "Nuevo dispositivo cargado correctamente.";
-            pInfo.className = "textoCorrecto";
+            //pInfo.className = "textoCorrecto";
 
             console.log("dispoNuevo: ", dispoNuevo);
+            return  dispoNuevo;
             
         } else {
             pInfo.innerHTML = "Carga de nuevo dispositivo rechazada.";
-            pInfo.className = "textoError";
+            //pInfo.className = "textoError";
         }
+    
+    }
+
+    private postDispositivo(dispoNuevo: Device) {
+        let xmlRequest = new XMLHttpRequest();
+        let estadoDispo: Number; //Variable para almacenar el estado del dispositivo convertido de Boolean a Number
+
+        xmlRequest.onreadystatechange = () => {
+            if (xmlRequest.readyState == 4) {
+                if (xmlRequest.status == 200) {
+                    console.log("Llegó respuesta: ",xmlRequest.responseText);        
+                } else {
+                    alert("Salió mal la consulta");
+                }
+            }    
+        }
+               
+        xmlRequest.open("POST", "http://localhost:8000/dispoNuevo", true)
+        xmlRequest.setRequestHeader("Content-Type", "application/json");
+        //Convierto el estado de dispositivo de Bool a Number para que la Query se procese correctamente.
+        if (dispoNuevo.state) {
+            estadoDispo = 1;
+        } else {
+            estadoDispo = 0;
+        }
+        
+        let s = {
+            name: dispoNuevo.name,
+            description: dispoNuevo.description,
+            state: estadoDispo,
+            type: dispoNuevo.type
+           };
+        xmlRequest.send(JSON.stringify(s)); 
     }
 
     handleEvent(object: Event): void {
         let elemento = <HTMLElement>object.target;
         let switchID: Array<String> = [];
+        let dispoNuevo: Device;
         
         if ("btnListar" == elemento.id) {
             this.buscarDevices();
@@ -125,13 +166,12 @@ class Main implements EventListenerObject{
             
             this.ejecutarPost(parseInt(checkbox.getAttribute("nuevoAtt")),checkbox.checked);
         } else if ("btnGuardar" == elemento.id) {
-            this.cargarDispositivo();
+            dispoNuevo = this.formDispositivo()
+            this.postDispositivo(dispoNuevo);
         } else {
             console.log("elemento.id no matcheo con las opciones disponibles")
-        }
-    
-    }
-
+        }  
+    } 
 }
 
     

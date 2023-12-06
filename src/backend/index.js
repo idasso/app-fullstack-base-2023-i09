@@ -58,6 +58,20 @@ app.post("/device",(req,res,next)=>{
     }
 });
 
+app.post("/dispoNuevo",(req,res,next)=>{
+        
+    console.log("Llego el post","INSERT INTO `Devices` (`name`, `description`, `state`, `type`) VALUES ('"+req.body.name+"', '"+req.body.description+"', '"+req.body.state+"', '"+req.body.type+"');");
+
+    utils.query("INSERT INTO `Devices` (`name`, `description`, `state`, `type`) VALUES ('"+req.body.name+"', '"+req.body.description+"', '"+req.body.state+"', '"+req.body.type+"');");
+   
+    console.log("res.status:", res.statusCode);
+    if(res.statusCode==200){
+        res.status(200).send("Se agregó el nuevo dispositivo.");
+    } else{
+        res.status(409).send("Error al agregar el nuevo dispositivo.");
+    }
+});
+
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");
 });

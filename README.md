@@ -14,6 +14,13 @@ Será posible interactuar con los dispositivos pudiendo encenderlos/apagarlos ha
 Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y validaciones en la carga de los campos indicados.
 
 ## Log
+05/12/2023
+- Agregado de dispositivo a la base de datos completado. Correcciones en método de carga de datos de dispositivos (ver "formDispositivo"), agregado de método postDispositivo para la interacción con el backend, agregado de la ruta "localhost:8000/dispoNuevo". Se verifica correcta actualización en la base de datos con autoasignación de la numeración.
+- Falta: 
+    - Corregir definiciones iniciales en dumps/smart_home.sql para que coincidan los "type" con los criterios utilizados en el formulario de carga (1: luz, 2: persiana, 3: ventilador).
+    - Agregar validaciones para la entrada de datos en front y back.
+    - Corregir texto de confirmación de carga de dispositivo en la BD para que valide en pantalla luego de que el servidor valide.
+
 04/12/2023
 - Se retoma la edición del backend buscando lograr conformar la vista de dispositivos. Sigue siendo necesario hacer una edición en el "main.ts" luego de cada vez que se levanta el docker.
 - Se completa el index.js para probar el "localhost:8000/otracosa/:id/:algo". Funciona OK. Commit.
