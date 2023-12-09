@@ -72,6 +72,19 @@ app.post("/dispoNuevo",(req,res,next)=>{
     }
 });
 
+app.delete("/borrarDispo",(req,res,next)=>{
+    console.log("Llego el post",
+    "DELETE FROM `Devices` WHERE id = "+req.body.id);
+    utils.query("DELETE FROM `Devices` WHERE id = "+req.body.id);
+    console.log("req.body.name:", req.body.name);
+    console.log("res.status:", res.statusCode);
+    if(res.statusCode==200){
+        res.status(200).send("Se eliminó el dispositivo de la base de datos.");
+    } else{
+        res.status(409).send("Error al borrar el dispositivo.");
+    }
+});
+
 app.listen(PORT, function(req, res) {
     console.log("NodeJS API running correctly");
 });

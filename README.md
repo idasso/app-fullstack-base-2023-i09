@@ -15,7 +15,9 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
 
 ## Log
 09/12/2023
-- Completada la carga automática de los dispositivos luego de la carga de la página web. Asimismo, al cargar un dispositivo nuevo se refresca automáticamente la lista de dispositivos en pantalla. Se borra el bontón de "listar".
+- Borrado de dispositivo agregado. Agregado de botón de borrado en cada dispositivo. Definición de una ruta nuevo asociada al verbo DELETE para borrado de dispositivos y refresco automático de la pantalla posterior al borrado. 
+    - *Falta* (a) agregar una confirmación antes de borrar, (b) reubicar el botón de borrado.(ambas correcciones son superficiales).
+- Completada la carga automática de los dispositivos luego de la carga de la página web. Asimismo, al cargar un dispositivo nuevo se refresca automáticamente la lista de dispositivos en pantalla. Se borra el bontón de "listar".Commit
 - Completada la asignación de imágenes en función del tipo de dispositivo. Agregado de las imágenes en frontend/static/images y edición del código en el main.ts.
 - Completada la validación de datos en el front para la carga de nuevos dispositivos. Se tiene que cumplir que tanto el nombre como la descripción tengan más de 3 caracteres y que la definición del tipe no puede quedar sin asginarse.
 - Completada la correción en las definiciones iniciales en dumps/smart_home.sql para que coincidan los 'type' con los criterios utilizados en el formulario de carga (1: luz, 2: persiana, 3: ventilador). No se logró la actualización de la lógica de asignación de los type borrando contenedores e imágenes en Docker y dándolos de alta nuevamente. Se hizo un DROP de la tabla Devices y se creó nuevamente con los nuevos criterios aplicados. Commit.

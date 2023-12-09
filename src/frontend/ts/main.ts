@@ -58,12 +58,15 @@ class Main implements EventListenerObject{
                         </label>
                       </div>
                         </a>
+                        <a class="waves-effect waves-light btn-small" id="del_${d.id}" otroAtt="${d.id}"><i class="material-icons right">delete</i>Borrar</a>
                       </li>`
                         ul.innerHTML += itemList;
                     }
                     for (let d of datos) {
                         let checkbox = document.getElementById("cb_" + d.id);
                         checkbox.addEventListener("click", this);
+                        let botonBorrar = document.getElementById("del_" + d.id);
+                        botonBorrar.addEventListener("click", this);
                     }
                 }else{
                     console.log("no encontre nada");
@@ -162,6 +165,28 @@ class Main implements EventListenerObject{
         xmlRequest.send(JSON.stringify(s)); 
     }
 
+    private borrarDispositivo(id: String) {
+        let xmlRequest = new XMLHttpRequest();
+        
+        xmlRequest.onreadystatechange = () => {
+            if (xmlRequest.readyState == 4) {
+                if (xmlRequest.status == 200) {
+                    console.log("Llegó respuesta: ",xmlRequest.responseText);        
+                } else {
+                    alert("Salió mal la consulta");
+                }
+            }    
+        }
+               
+        xmlRequest.open("DELETE", "http://localhost:8000/borrarDispo", true)
+        xmlRequest.setRequestHeader("Content-Type", "application/json");        
+        
+        let s = {
+            id: id
+           };
+        xmlRequest.send(JSON.stringify(s)); 
+    }
+
     handleEvent(object: Event): void {
         let elemento = <HTMLElement>object.target;
         let switchID: Array<String> = [];
@@ -178,7 +203,14 @@ class Main implements EventListenerObject{
             dispoNuevo = this.formDispositivo()
             this.postDispositivo(dispoNuevo);
             this.buscarDevices(); //Una vez que se carga el dispositivo se actualiza la lista de dispositivos en pantalla.
-        } else {
+        } else if (elemento.id.startsWith("del_")) {
+            let botonBorrar = <HTMLInputElement>elemento;
+            console.log(botonBorrar.getAttribute("otroAtt"));
+            this.borrarDispositivo(botonBorrar.getAttribute("otroAtt"));
+            this.buscarDevices(); //Una vez que se borra un dispositivo se actualiza la lista de dispositivos en pantalla.
+            
+            //this.ejecutarPost(parseInt(checkbox.getAttribute("nuevoAtt")),checkbox.checked);
+        }else {
             console.log("elemento.id no matcheo con las opciones disponibles")
         }  
     } 
