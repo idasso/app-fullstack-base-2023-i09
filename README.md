@@ -15,7 +15,10 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
 
 ## Log
 09/12/2023
-- Completada la correción en las definiciones iniciales en dumps/smart_home.sql para que coincidan los "type" con los criterios utilizados en el formulario de carga (1: luz, 2: persiana, 3: ventilador). No se logró la actualización de la lógica de asignación de los type borrando contenedores e imágenes en Docker y dándolos de alta nuevamente. Se hizo un DROP de la tabla Devices y se creó nuevamente con los nuevos criterios aplicados. Commit.
+- Completada la carga automática de los dispositivos luego de la carga de la página web. Asimismo, al cargar un dispositivo nuevo se refresca automáticamente la lista de dispositivos en pantalla. Se borra el bontón de "listar".
+- Completada la asignación de imágenes en función del tipo de dispositivo. Agregado de las imágenes en frontend/static/images y edición del código en el main.ts.
+- Completada la validación de datos en el front para la carga de nuevos dispositivos. Se tiene que cumplir que tanto el nombre como la descripción tengan más de 3 caracteres y que la definición del tipe no puede quedar sin asginarse.
+- Completada la correción en las definiciones iniciales en dumps/smart_home.sql para que coincidan los 'type' con los criterios utilizados en el formulario de carga (1: luz, 2: persiana, 3: ventilador). No se logró la actualización de la lógica de asignación de los type borrando contenedores e imágenes en Docker y dándolos de alta nuevamente. Se hizo un DROP de la tabla Devices y se creó nuevamente con los nuevos criterios aplicados. Commit.
 
 05/12/2023
 - Agregado de dispositivo a la base de datos completado. Correcciones en método de carga de datos de dispositivos (ver "formDispositivo"), agregado de método postDispositivo para la interacción con el backend, agregado de la ruta "localhost:8000/dispoNuevo". Se verifica correcta actualización en la base de datos con autoasignación de la numeración.
@@ -31,7 +34,7 @@ Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y v
 - Se agrega el la imagen de lightbulb.png y el favicon.ico. *Falta* que las imágenes se asignen automáticamente según el Device>Type. Commit.
 - CLASE - Consultas: 
     - Para que la lista de dispositivos se cargue automáticamente al terminar de cargar la página web:
-        - (1) utilizar el contructor dentro del main (preferentement)
+        - (1) utilizar el constructor dentro del main (preferentemente)
         - (2) llamar a la función que busca los dispositivos dentro del "window.addEventListener("load",...)"
     - Agregar la aclaración acerca de como responde la conexión a la BD y la necesidad de hacer una edición en el main.ts para que se pueda completar la conexión con la BD.
     - Acerca de las notas en el README, no hace falta el log ya que es algo propio de los commit. Usar el readme para completar mas detalle del proyecto y el objetivo de lo que voy a implementar. Usarlo como referecnia apra aclarar la expectativas, que hace el pryecto, etc.

@@ -7,7 +7,7 @@ class Main implements EventListenerObject{
     // agregar un contructor y que haga el buscarDevices
     public dispositivosNuevos: Array<Device>= new Array<Device>();
 
-    private buscarDevices() {
+    public buscarDevices() { //El método es ahora public para poder ser invocado desde el `window.addEventListener("load"`
         
         let xmlRequest = new XMLHttpRequest(); // Permite hacer peticiones a un servido asíncrono. Es decir, el servidor en algún momento nos va a contestar, pero no sabemos cuando.
         
@@ -21,11 +21,24 @@ class Main implements EventListenerObject{
                     //Una vez que tenemos el objeto ya podemos manipularlo más fácilmente.
                     
                     let ul = document.getElementById("listaDisp");
+                    ul.innerHTML = ""; //Agrego esta línea para que en futuros llamados del buscarDevice no incremente indefinidamente la lista.
 
                     for (let d of datos) { // Tengo que agregar el checked  adentro del input type. Si state==true, que esté "checked". Defino una variable que según el state sea true o no, completo el contenido con la palabra "checked" dentreo de la etiqueta de apertura <input> del checkbox.
                         let itemList =
                             ` <li class="collection-item avatar">
-                        <img src="./static/images/lightbulb.png" alt="" class="circle">
+                        <img src="./static/images/`;
+                        //Se completa el código para invocar la imagen correspondiente según el tipo de dispositivo.
+                        if (d.type == 1) {
+                            itemList+= `lampara`;
+                        } else if (d.type == 2) {
+                            itemList+= `persiana`;
+                        } else if (d.type == 3) {
+                            itemList+= `ventilador`; 
+                        } else {
+                            itemList+= `undefined`; //En caso de que algo no quede bien definido se suma una imagen de referencia que indique un problema.
+                        }
+                        
+                        itemList+= `.png" alt="" class="circle">
                         <span class="title">${d.name}</span>
                         <p>
                          ${d.description}
@@ -39,7 +52,6 @@ class Main implements EventListenerObject{
                         if (d.state) {
                             itemList+= ` checked `
                         }
-                        
                         itemList+= `>
                           <span class="lever"></span>
                           On
@@ -47,21 +59,16 @@ class Main implements EventListenerObject{
                       </div>
                         </a>
                       </li>`
-                       
                         ul.innerHTML += itemList;
-
                     }
                     for (let d of datos) {
                         let checkbox = document.getElementById("cb_" + d.id);
-
                         checkbox.addEventListener("click", this);
                     }
-
                 }else{
                     console.log("no encontre nada");
                 }
             }
-            
         }
         xmlRequest.open("GET","http://localhost:8000/devices",true)
         xmlRequest.send();
@@ -97,7 +104,9 @@ class Main implements EventListenerObject{
         pInfo.innerHTML = "";
         console.log("state.value: ",state.checked);
         console.log("state.type: ",type.selectedIndex);
-        if (name.value.length > 4) {
+
+        //Agrego 3 validaciones: (1) que el nombre tenga más de 3 caracteres, (2) que la descripción tenga más de 3 caracteres, (3) que en el "type" se tenga que seleccionar si o si una opción.
+        if (name.value.length > 3 && description.value.length > 3 && type.selectedIndex > 0) {
             let dispoNuevo: Device = new Device(name.value, description.value, state.checked, type.selectedIndex);
             this.dispositivosNuevos.push(dispoNuevo);
             
@@ -168,6 +177,7 @@ class Main implements EventListenerObject{
         } else if ("btnGuardar" == elemento.id) {
             dispoNuevo = this.formDispositivo()
             this.postDispositivo(dispoNuevo);
+            this.buscarDevices(); //Una vez que se carga el dispositivo se actualiza la lista de dispositivos en pantalla.
         } else {
             console.log("elemento.id no matcheo con las opciones disponibles")
         }  
@@ -178,9 +188,8 @@ class Main implements EventListenerObject{
 window.addEventListener("load", () => {
     
     let main1: Main = new Main();
-    // opcion para aagregar el llamado. Mínimo: back + front + persistencia
-    let boton = document.getElementById("btnListar");
-    boton.addEventListener("click", main1);
+
+    main1.buscarDevices(); // Llamado inicial a la función para que se listen los dispositivos automáticamente con la carga de la página.
 
     var elems = document.querySelectorAll('select');
     M.FormSelect.init(elems, "");
