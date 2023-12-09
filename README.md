@@ -14,6 +14,9 @@ Será posible interactuar con los dispositivos pudiendo encenderlos/apagarlos ha
 Asimismo, será posible agregar y borrar dispositivos con el uso de un modal y validaciones en la carga de los campos indicados.
 
 ## Log
+09/12/2023
+- Completada la correción en las definiciones iniciales en dumps/smart_home.sql para que coincidan los "type" con los criterios utilizados en el formulario de carga (1: luz, 2: persiana, 3: ventilador). No se logró la actualización de la lógica de asignación de los type borrando contenedores e imágenes en Docker y dándolos de alta nuevamente. Se hizo un DROP de la tabla Devices y se creó nuevamente con los nuevos criterios aplicados. Commit.
+
 05/12/2023
 - Agregado de dispositivo a la base de datos completado. Correcciones en método de carga de datos de dispositivos (ver "formDispositivo"), agregado de método postDispositivo para la interacción con el backend, agregado de la ruta "localhost:8000/dispoNuevo". Se verifica correcta actualización en la base de datos con autoasignación de la numeración.
 - Falta: 
