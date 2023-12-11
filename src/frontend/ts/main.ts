@@ -76,7 +76,7 @@ class Main implements EventListenerObject{
         xmlRequest.open("GET","http://localhost:8000/devices",true)
         xmlRequest.send();
     } 
-    // DELETE se puede mandar en el send (llega al body, hay que usar el setRequestHeader indicando que el conten type es tipo json) o por la cabecera ( no hace falta aclarar nada porque no viaja info en el body)
+    
     private ejecutarPost(id:number,state:boolean) {
         let xmlRequest = new XMLHttpRequest();
 
